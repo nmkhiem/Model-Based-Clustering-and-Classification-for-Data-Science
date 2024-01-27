@@ -1,4 +1,4 @@
-# Summary Model-Based Clustering and Classification for Data Science (Vietnamese)
+# (Book Summary) Model-Based Clustering and Classification for Data Science (Vietnamese)
  
 # Reference:
 
