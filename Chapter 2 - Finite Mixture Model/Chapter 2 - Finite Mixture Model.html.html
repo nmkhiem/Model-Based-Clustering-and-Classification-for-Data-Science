@@ -459,17 +459,17 @@ nhất.</p></li>
 <p>Số lượng lớn params gây khó khăn trong việc tính toán lẫn biểu diễn
 kết quả. Chiếm phần lớn nhất đến từ covariance matrix.</p>
 <p>Do vậy để khắc phục điều này, người ta dùng <strong>eigenvalue
-decomposition</strong> (hay Singular Value Decomposition) thay cho
-covariance matrix <span class="math inline">\(\Sigma_g\)</span></p>
+decomposition</strong> thay cho covariance matrix <span class="math inline">\(\Sigma_g\)</span></p>
 <div id="page-20---eigenvalue-decomposition" class="section level2">
 <h2>Page 20 - eigenvalue decomposition</h2>
 <p><span class="math display">\[
   \Sigma_g = \lambda_gD_gA_gD_g^T. \tag{2.3}
-\]</span> Trong đó: - <span class="math inline">\(\lambda_g\)</span>:
-vector tỉ lệ thể tích (Volume).</p>
+\]</span> Trong đó:</p>
 <ul>
-<li><p><span class="math inline">\(D_g\)</span>: ma trận eigenvalue thể
-hiện cho hướng (Direction) phân tán của cluster.</p></li>
+<li><p><span class="math inline">\(\lambda_g\)</span>: vector tỉ lệ thể
+tích (Volume).</p></li>
+<li><p><span class="math inline">\(D_g\)</span>: ma trận eigenvectors
+thể hiện cho hướng (Direction) phân tán của cluster.</p></li>
 <li><p><span class="math inline">\(A_g\)</span>: ma trận đường chéo
 eigenvalue. thể hiện cho độ lớn phân tán.</p></li>
 </ul>
@@ -493,8 +493,26 @@ cách khác, các điểm dữ liệu trong cluster thứ <span class="math inli
 thứ 2 hơn.</p></li>
 <li><p>Nếu <span class="math inline">\(A_{1, g} \approx A_{2, g} &gt;
 A_{3, g}\)</span> thì component thứ <span class="math inline">\(g\)</span> tập trung xung quanh hyperplane tạo bởi
-direction 1 và 2.</p></li>
+direction 1 và 2.</p>
+<blockquote>
+<p>The constant of proportionality <span class="math inline">\(λ_g\)</span> determines the volume occupied by the
+<span class="math inline">\(g\)</span>th mixture component in <span class="math inline">\(R^d\)</span>, which is proportional to <span class="math inline">\(λ_d^g|A_g|\)</span>. It is common to constrain the
+matrix <span class="math inline">\(A_g\)</span> so that its determinant
+is equal to 1, in which case <span class="math inline">\(λ_g\)</span>
+directly determines the volume of the <span class="math inline">\(g\)</span>th component, which is then proportional
+to <span class="math inline">\(λ^d_g\)</span> (often choose the first
+eigenvalue of <span class="math inline">\(Σ_g\)</span>).</p>
+</blockquote></li>
 </ul>
+<p>Mỗi bước cập nhật / ước lượng xác suất trung bình của EM Algorithm
+(Maximum Likelihood) cho mỗi component sẽ thay đổi <span class="math inline">\(A_g\)</span> và kéo theo <span class="math inline">\(\lambda_g\)</span> cũng thay đổi (vừa thay đổi
+Volume, vừa thay đổi Shape). Do đó người ta sẽ cố định shape của mọi
+component bằng cách ràng buộc (constraint) <span class="math inline">\(det(A_g) = 1\)</span> (mọi component đều có shape
+giống nhau).</p>
+<p>Vậy bài toán bây giờ chỉ còn tìm ra volume của từng component <span class="math inline">\(\lambda_g\)</span> (phóng to hoặc thu nhỏ cái
+shape chung đó). Kỹ thuật này được gọi là <strong>geometric
+decomposition</strong> hay <strong>Volume-Shape-Orientation (VSO)
+decomposition</strong>.</p>
 </div>
 <div id="tổng-kết-và-câu-hỏi" class="section level2">
 <h2>Tổng kết và Câu hỏi:</h2>
